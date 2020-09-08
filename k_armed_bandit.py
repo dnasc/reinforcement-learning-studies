@@ -82,10 +82,10 @@ class EpsilonGreedyAgent(Agent):
     :ivar _value_estimate list[float]: The current value estimate for each action expected reward.
 
     Some facts to consider:
-    - The value estimate of an actions is computed as the average reward received throughout past times the actions was
-    taken. Specifically, the action value estimate $$Q_{t+1} = Q_t + \frac1t \left(R_t - Q_t)\right) $$ where $$R_t$$
-    is the reward received at time $$t$$.
-    - At every time step, the agent randomly chooses between exploration and exploitation based on epsilon.  If its
+    - The value estimate of an action is computed as the average reward received throughout past times the action was
+    taken. Specifically, the action value estimate is defined by $$Q_{t+1} = Q_t + \frac1t \left(R_t - Q_t)\right)$$
+    where $$R_t$$ is the reward received at time $$t$$.
+    - At every time step, an agent randomly chooses between exploration and exploitation based on epsilon.  If its
     choice is to explore, then it uniformly choose one of the actions. Otherwise, it chooses the action having the
     current maximum value estimate.
     - After choosing an action and receiving the reward for it, the agent updates the action value estimate accordingly.
@@ -177,11 +177,11 @@ class VaryingStepSizeEpsilonGreedyAgent(EpsilonGreedyAgent):
 
 class UpperConfidenceBoundAgent(Agent):
     """
-    Implement an epsilon greedy agent which takes into account the uncertainty underlying action value estimates.
+    Implement an agent which takes into account the uncertainty underlying action value estimates.
     Specifically, when choosing an action, the agent choose not the one with the maximum current (exploitation) value
     estimate or a random one (exploration); instead it balances its choice based on both the maximum current value
     estimate and the uncertainty associated with a given action. Note that as time goes, the uncertainty of the value
-    estimate decreases and the agent tends to give more importance to past value estimates.
+    estimates decrease and the agent tends to give more importance to past value estimates.
     """
 
     def __init__(self, *,  c, **kwargs):
